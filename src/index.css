@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/* --- Peace Sans Font Definition --- */
+
+@font-face {
+  font-family: 'Peace Sans';
+  font-style: normal;
+  font-weight: 400 900;
+  src: local('Peace Sans'),
+       url('/assets/fonts/peace_sans.woff') format('woff'),
+       url('https://fonts.cdnfonts.com/s/16323/peace_sans.woff') format('woff');
+  font-display: swap;
+}
+
+/* --- Tailwind Theme Configuration --- */
+@theme {
+  --font-title: 'Peace Sans', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'DM Sans', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* --- Dark Mode Variant for Tailwind (supports both data-theme="dark" and .dark class) --- */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
+
+/* --- Base Global Styles --- */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 80px; 
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #eaedf0;
+  color: #000000;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] body,
+.dark body {
+  background-color: #09090b;
+  color: #f4f4f5;
+}
+
+/* --- Continuous Marquee Animation for Tech Strip --- */
+@keyframes techMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-tech-marquee {
+  display: flex;
+  width: max-content;
+  animation: techMarquee 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-tech-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-tech-marquee {
+    animation: none;
+    transform: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
